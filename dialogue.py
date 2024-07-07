@@ -144,10 +144,10 @@ def scene(screen, file, bloop, s2=None, lastInput=None):
     screen.blit(transparent, (0,0))
 
 
-    db = pyg.image.load('db3.png')
-    player = main.load_image('player.png', .65)
-    omni = main.load_image('omnipotent.png', 1)
-    giver = main.load_image('giver.png', .5)
+    db = pyg.image.load('images/db3.png')
+    player = main.load_image('images/player.png', .65)
+    omni = main.load_image('images/omnipotent.png', 1)
+    giver = main.load_image('images/giver.png', .5)
 
     spkr1 = player
 
@@ -232,5 +232,5 @@ def scene(screen, file, bloop, s2=None, lastInput=None):
 if __name__ == '__main__':
     pyg.init
     pyg.mixer.init()
-    bloop = pyg.mixer.Sound('powerup.wav')
-    scene(pyg.display.set_mode((1024,512)), 'powerup.txt', bloop)
+    bloop = pyg.mixer.Sound('sounds/powerup.wav')
+    scene(pyg.display.set_mode((1024,512)), 'text/powerup.txt', bloop)

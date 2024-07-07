@@ -40,10 +40,10 @@ def get_font(size):
 def resetGame(difficulty=0):
     """resets the game"""
     pyg.mixer.music.stop()
-    pyg.mixer.music.load('dialogue.wav')
+    pyg.mixer.music.load('sounds/dialogue.wav')
     pyg.mixer.music.play(-1)
     screen.blit(background_img, (0, 0))
-    input = dia.scene(screen, 'scene1.txt', bloop)
+    input = dia.scene(screen, 'text/scene1.txt', bloop)
     start_time = pyg.time.get_ticks()
     game(start_time, input, difficulty=difficulty)
 
@@ -60,7 +60,7 @@ def pause(difficulty=0, game_status=None, score=None, p_time=None):
             if musicstopped == False:
                 firstTime = True
                 pyg.mixer.music.stop()
-                pyg.mixer.music.load('victory.wav')
+                pyg.mixer.music.load('sounds/victory.wav')
                 pyg.mixer.music.play(-1)
                 musicstopped = True
             screen.fill((0,0,0))
@@ -103,7 +103,7 @@ def pause(difficulty=0, game_status=None, score=None, p_time=None):
             if musicstopped == False:
                 firstTime = True
                 pyg.mixer.music.stop()
-                pyg.mixer.music.load('gameover.wav')
+                pyg.mixer.music.load('sounds/gameover.wav')
                 pyg.mixer.music.play(-1)
                 musicstopped = True
             screen.fill((0,0,0))
@@ -340,7 +340,7 @@ def game(start_time, input, difficulty = 0):
     walls = [left_wall, right_wall, top_wall, bottom_wall]
 
     # changing game icon to our own art, the icon variable can also be used for desktop shortcuts
-    icon = pyg.image.load('dragon.png')  # change dragon.png to the art for our title
+    icon = pyg.image.load('images/dragon.png')  # change dragon.png to the art for our title
     pyg.display.set_icon(icon)
 
     running = True
@@ -368,16 +368,16 @@ def game(start_time, input, difficulty = 0):
                 board.change = True
                 if origin.type == "boss":
                     pyg.mixer.music.stop()
-                    pyg.mixer.music.load('dialogue.wav')
+                    pyg.mixer.music.load('sounds/dialogue.wav')
                     pyg.mixer.music.play(-1)
-                    checkInput = dia.scene(screen, "scene4.txt", bloop, s2="omni")
+                    checkInput = dia.scene(screen, "text/scene4.txt", bloop, s2="omni")
                     screen.blit(background_img, (0, 0))
                     pyg.mixer.music.stop()
-                    pyg.mixer.music.load('boss.wav')
+                    pyg.mixer.music.load('sounds/boss.wav')
                     pyg.mixer.music.play(-1)
                 else:
                     pyg.mixer.music.stop()
-                    pyg.mixer.music.load('fightmusic.wav')
+                    pyg.mixer.music.load('sounds/fightmusic.wav')
                     pyg.mixer.music.play(-1)
                 combatmusic = True
         else:
@@ -393,14 +393,14 @@ def game(start_time, input, difficulty = 0):
 
                 if firstclear:
                     pyg.mixer.music.stop()
-                    pyg.mixer.music.load('dialogue.wav')
+                    pyg.mixer.music.load('sounds/dialogue.wav')
                     pyg.mixer.music.play(-1)
-                    checkInput = dia.scene(screen, "scene2.txt", bloop, s2="omni")
+                    checkInput = dia.scene(screen, "text/scene2.txt", bloop, s2="omni")
                     screen.blit(background_img, (0, 0))
                     firstclear = False
 
                 pyg.mixer.music.stop()
-                pyg.mixer.music.load('empty.wav')
+                pyg.mixer.music.load('sounds/empty.wav')
                 powerup_giver.spawn_anim = True
                 powerup_giver.spawn_counter = 0
                 origin.obstacles.append(powerup_giver)
@@ -410,15 +410,15 @@ def game(start_time, input, difficulty = 0):
             if powerup_giver.rect.colliderect(player.rect) and not origin.collected and powerup_giver.spawn_anim==False:
                 # gives player powerup dialogue if they collide with powerup giver
                 pyg.mixer.music.stop()
-                pyg.mixer.music.load('dialogue.wav')
+                pyg.mixer.music.load('sounds/dialogue.wav')
                 pyg.mixer.music.play(-1)
                 checkInput = None
 
                 if firstpower:
-                    checkInput = dia.scene(screen, "scene3.txt", bloop, s2="giver")
+                    checkInput = dia.scene(screen, "text/scene3.txt", bloop, s2="giver")
                     firstpower = False
                 else:
-                    checkInput = dia.scene(screen, "powerup.txt", bloop, s2="giver")
+                    checkInput = dia.scene(screen, "text/powerup.txt", bloop, s2="giver")
 
                 empower(player,checkInput)
                 origin.powerupCollected()
@@ -427,7 +427,7 @@ def game(start_time, input, difficulty = 0):
                 screen.blit(background_img, (0, 0))
                 board.update()
                 pyg.mixer.music.stop()
-                pyg.mixer.music.load('empty.wav')
+                pyg.mixer.music.load('sounds/empty.wav')
                 pyg.mixer.music.play(-1)
 
             pressed_keys = pyg.key.get_pressed()
@@ -537,12 +537,12 @@ def main_menu(fromTutorial=False, difficulty = 0):
     pyg.display.set_caption('Menu')
     if not fromTutorial:
         pyg.mixer.music.stop()
-        pyg.mixer.music.load('menu.wav')
+        pyg.mixer.music.load('sounds/menu.wav')
         pyg.mixer.music.play(-1)
 
     while True:
         screen.blit(menu_img, (0, 0))
-        icon = pyg.image.load('dragon.png')  # change dragon.png to the art for our title
+        icon = pyg.image.load('images/dragon.png')  # change dragon.png to the art for our title
         pyg.display.set_icon(icon)
         menu_mouse_pos = pyg.mouse.get_pos()
         
@@ -581,7 +581,7 @@ def tutorial_window(difficulty=0):
     pyg.display.set_caption('Instructions')
     while True:
         screen.fill((24,20,37)) #blue background w the same rgb tuple as the main menu screen
-        icon = pyg.image.load('dragon.png')  # change dragon.png to the art for our title
+        icon = pyg.image.load('images/dragon.png')  # change dragon.png to the art for our title
         pyg.display.set_icon(icon)
         menu_mouse_pos = pyg.mouse.get_pos()
 
@@ -620,7 +620,7 @@ def options_window(difficulty = 0):
 
     while True:
         screen.fill((24,20,37))
-        icon = pyg.image.load('dragon.png') 
+        icon = pyg.image.load('images/dragon.png') 
         pyg.display.set_icon(icon)
         menu_mouse_pos = pyg.mouse.get_pos()
 
@@ -680,60 +680,60 @@ if __name__ == '__main__':
     clock = pyg.time.Clock()
 
     # loading sound
-    swoosh = pyg.mixer.Sound('missed_target.wav')
-    splat = pyg.mixer.Sound('sword_swing.wav')
-    bloop = pyg.mixer.Sound('powerup.wav')
+    swoosh = pyg.mixer.Sound('sounds/missed_target.wav')
+    splat = pyg.mixer.Sound('sounds/sword_swing.wav')
+    bloop = pyg.mixer.Sound('sounds/powerup.wav')
 
     # image loading module
-    attack_img = load_image('attack.png', 0.3)
+    attack_img = load_image('images/attack.png', 0.3)
     attack_img = pyg.transform.rotate(attack_img, 20)
-    player1_img = load_image('cat.png', .15)
-    background_img = load_image('background_rect.png', 1.2)
-    skeleton_img = load_image('skeleton.png', .13)
-    gskeleton_img = load_image('gskeleton.png', .13)
-    bat_img = load_image('bat.png', .15)
-    rbat_img = load_image('rbat.png', .15)
-    bone_img = load_image('bone.png', .2)
-    button_surface = load_image('menu_button.png', 0.75)
-    menu_img = load_image('bg.png', 1.2)
-    goblin_img = load_image('goblin.png', .15)
-    bgoblin_img = load_image('bgoblin.png', .15)
-    cover_img = load_image('cover_up.png', 0.5)
-    power_giver_img = load_image('powerup_giver.png', .35)
-    boss_img = load_image('omnipotent_being.png', .2)
-    circle_img = load_image('circle.png', .05)
+    player1_img = load_image('images/cat.png', .15)
+    background_img = load_image('images/background_rect.png', 1.2)
+    skeleton_img = load_image('images/skeleton.png', .13)
+    gskeleton_img = load_image('images/gskeleton.png', .13)
+    bat_img = load_image('images/bat.png', .15)
+    rbat_img = load_image('images/rbat.png', .15)
+    bone_img = load_image('images/bone.png', .2)
+    button_surface = load_image('images/menu_button.png', 0.75)
+    menu_img = load_image('images/bg.png', 1.2)
+    goblin_img = load_image('images/goblin.png', .15)
+    bgoblin_img = load_image('images/bgoblin.png', .15)
+    cover_img = load_image('images/cover_up.png', 0.5)
+    power_giver_img = load_image('images/powerup_giver.png', .35)
+    boss_img = load_image('images/omnipotent_being.png', .2)
+    circle_img = load_image('images/circle.png', .05)
     # list of enemy images
     enemy_imgs = [skeleton_img, gskeleton_img, goblin_img, bgoblin_img, bat_img, rbat_img, boss_img]
 
     # locked and unlocked doors in all 4 directions
-    left_locked = load_image_location('locked.png', .31, 0, 225)
-    left_unlocked = load_image_location('unlocked.png', .416, 0, 225)
-    right_locked = load_image_location('locked.png', .31, 1160, 225)
-    right_unlocked = load_image_location('unlocked.png', .416, 1097, 225)
+    left_locked = load_image_location('images/locked.png', .31, 0, 225)
+    left_unlocked = load_image_location('images/unlocked.png', .416, 0, 225)
+    right_locked = load_image_location('images/locked.png', .31, 1160, 225)
+    right_unlocked = load_image_location('images/unlocked.png', .416, 1097, 225)
     right_locked.image = pyg.transform.rotate(right_locked.image, 180)
     right_unlocked.image = pyg.transform.rotate(right_unlocked.image, 180)
-    top_locked = load_image_location('locked.png', .31, 510, 0)
-    top_unlocked = load_image_location('unlocked.png', .416, 510, 0)
+    top_locked = load_image_location('images/locked.png', .31, 510, 0)
+    top_unlocked = load_image_location('images/unlocked.png', .416, 510, 0)
     top_locked.image = pyg.transform.rotate(right_locked.image, 90)
     top_unlocked.image = pyg.transform.rotate(right_unlocked.image, 90)
-    bottom_locked = load_image_location('locked.png', .31, 510, 546)
-    bottom_unlocked = load_image_location('unlocked.png', .416, 510, 483)
+    bottom_locked = load_image_location('images/locked.png', .31, 510, 546)
+    bottom_unlocked = load_image_location('images/unlocked.png', .416, 510, 483)
     bottom_locked.image = pyg.transform.rotate(right_locked.image, 270)
     bottom_unlocked.image = pyg.transform.rotate(right_unlocked.image, 270)
 
     # boss doors
-    bossleft_locked = load_image_location('bosslocked.png', .31, -2, 150)
-    bossleft_unlocked = load_image_location('bossunlocked.png', .31, -2, 150)
-    bossright_locked = load_image_location('bosslocked.png', .31, 1157, 150)
-    bossright_unlocked = load_image_location('bossunlocked.png', .31, 1118, 150)
+    bossleft_locked = load_image_location('images/bosslocked.png', .31, -2, 150)
+    bossleft_unlocked = load_image_location('images/bossunlocked.png', .31, -2, 150)
+    bossright_locked = load_image_location('images/bosslocked.png', .31, 1157, 150)
+    bossright_unlocked = load_image_location('images/bossunlocked.png', .31, 1118, 150)
     bossright_locked.image = pyg.transform.rotate(bossright_locked.image, 180)
     bossright_unlocked.image = pyg.transform.rotate(bossright_unlocked.image, 180)
-    bosstop_locked = load_image_location('bosslocked.png', .31, 450, -2)
-    bosstop_unlocked = load_image_location('bossunlocked.png', .31, 450, -2)
+    bosstop_locked = load_image_location('images/bosslocked.png', .31, 450, -2)
+    bosstop_unlocked = load_image_location('images/bossunlocked.png', .31, 450, -2)
     bosstop_locked.image = pyg.transform.rotate(bossright_locked.image, 90)
     bosstop_unlocked.image = pyg.transform.rotate(bossright_unlocked.image, 90)
-    bossbottom_locked = load_image_location('bosslocked.png', .31, 450, 543)
-    bossbottom_unlocked = load_image_location('bossunlocked.png', .31, 450, 503)
+    bossbottom_locked = load_image_location('images/bosslocked.png', .31, 450, 543)
+    bossbottom_unlocked = load_image_location('images/bossunlocked.png', .31, 450, 503)
     bossbottom_locked.image = pyg.transform.rotate(bossright_locked.image, 270)
     bossbottom_unlocked.image = pyg.transform.rotate(bossright_unlocked.image, 270)
 
@@ -744,10 +744,10 @@ if __name__ == '__main__':
     bossunlocks = [bossleft_unlocked, bossright_unlocked, bosstop_unlocked, bossbottom_unlocked]
 
     # obstacles
-    rock1_img = load_image('rock1.png', 0.3)
-    rock2_img = load_image('rock2.png', 0.3)
-    rock3_img = load_image('rock3.png', 0.2)
-    bone2_img = load_image('bone2.png', 0.3)
+    rock1_img = load_image('images/rock1.png', 0.3)
+    rock2_img = load_image('images/rock2.png', 0.3)
+    rock3_img = load_image('images/rock3.png', 0.2)
+    bone2_img = load_image('images/bone2.png', 0.3)
     obstacle_imgs = [rock1_img, rock2_img, rock3_img, bone2_img]
 
     # starts the game
